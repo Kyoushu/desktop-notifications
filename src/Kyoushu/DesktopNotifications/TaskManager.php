@@ -40,6 +40,7 @@ class TaskManager
     public static function processTasks(LoggerInterface $logger)
     {
         foreach(self::getTasks() as $task){
+            $logger->debug(get_class($task), array('hash' => md5(serialize($task))));
             foreach($task->getNotifications($logger) as $notification){
                 $notification->send();
             }
