@@ -8,7 +8,8 @@ use Monolog\Logger;
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $logger = new Logger('log', array(
-    new StreamHandler(__DIR__ . '/logs/notification.log')
+    new StreamHandler(__DIR__ . '/logs/notification.log'),
+    new StreamHandler('php://output'),
 ));
 
 try{

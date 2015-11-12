@@ -1,0 +1,9 @@
+<?php
+
+namespace Kyoushu\DesktopNotifications;
+
+use Kyoushu\DesktopNotifications\Task\NonChanTask;
+
+return array(
+    //new NonChanTask('username', 'password')
+);
