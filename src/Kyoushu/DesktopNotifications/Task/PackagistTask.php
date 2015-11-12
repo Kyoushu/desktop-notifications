@@ -151,7 +151,7 @@ class PackagistTask implements  TaskInterface
                 '%s just passed %s downloads!',
                 $this->packageName,
                 $stats['downloads']['total']
-            ))
+            ), 'face-smile-big-symbolic')
         );
     }
 

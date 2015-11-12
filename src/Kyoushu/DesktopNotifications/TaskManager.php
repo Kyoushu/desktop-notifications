@@ -14,7 +14,8 @@ class TaskManager
     public static function getTasks()
     {
         return array(
-            new PackagistTask('accord/mandrill-swiftmailer-bundle', 3600)
+            new PackagistTask('accord/mandrill-swiftmailer-bundle', 3600),
+            new PackagistTask('accord/mandrill-swiftmailer', 3600)
         );
     }
 
