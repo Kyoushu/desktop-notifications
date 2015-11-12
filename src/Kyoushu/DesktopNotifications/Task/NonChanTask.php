@@ -81,9 +81,9 @@ class NonChanTask
         });
     }
 
-    protected function updateLastChecked()
+    protected function updateLastChecked(\DateTime $datetime)
     {
-        $this->cache->set('last_checked', new \DateTime('now'));
+        $this->cache->set('last_checked', $datetime);
     }
 
     protected function getUpdates()
@@ -104,11 +104,13 @@ class NonChanTask
         if($updates['data'][1]){
             foreach($updates['data'][1] as $message){
                 $message = strip_tags($message);
-                $notifications[] = Notification::create($message, 'notification-message-im')->setExpireTime(10000);
+                $notifications[] = Notification::create($message, 'notification-message-im')->setUrgency(Notification::URGENCY_CRITICAL);
             }
         }
 
-        $this->updateLastChecked();
+        $lastChecked = \DateTime::createFromFormat('U', $updates['data'][0]);
+
+        $this->updateLastChecked($lastChecked);
 
         return $notifications;
 
