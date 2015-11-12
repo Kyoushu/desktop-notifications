@@ -104,7 +104,7 @@ class NonChanTask
         if($updates['data'][1]){
             foreach($updates['data'][1] as $message){
                 $message = strip_tags($message);
-                $notifications[] = Notification::create($message);
+                $notifications[] = Notification::create($message, 'notification-message-im')->setExpireTime(10000);
             }
         }
 
