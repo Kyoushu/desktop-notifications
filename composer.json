@@ -1,0 +1,17 @@
+{
+    "name": "kyoushu/dekstop-notifications",
+    "authors": [
+        {
+            "name": "James Willans",
+            "email": "kyoushu@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/process": "^2.7"
+    },
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        }
+    }
+}
