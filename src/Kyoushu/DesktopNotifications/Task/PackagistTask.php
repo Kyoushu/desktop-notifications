@@ -166,7 +166,7 @@ class PackagistTask implements  TaskInterface
                 '%s just passed %s downloads!',
                 $this->packageName,
                 $stats['downloads']['total']
-            ), 'face-smile-big-symbolic')
+            ), 'face-smile-big-symbolic')->setUrgency(Notification::URGENCY_CRITICAL)
         );
     }
 
