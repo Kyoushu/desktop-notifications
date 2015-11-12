@@ -15,8 +15,8 @@ class TaskManager
     public static function getTasks()
     {
         $tasks =  array(
-            new PackagistTask('accord/mandrill-swiftmailer-bundle', 3600),
-            new PackagistTask('accord/mandrill-swiftmailer', 3600)
+            new PackagistTask('accord/mandrill-swiftmailer-bundle', 3600, 10),
+            new PackagistTask('accord/mandrill-swiftmailer', 3600, 10)
         );
 
         $tasks = array_merge($tasks, self::getCustomTasks());
