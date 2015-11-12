@@ -5,6 +5,7 @@ namespace Kyoushu\DesktopNotifications\Task;
 use Kyoushu\DesktopNotifications\Cache;
 use Kyoushu\DesktopNotifications\Exception\DesktopNotificationsException;
 use Kyoushu\DesktopNotifications\Notification;
+use Psr\Log\LoggerInterface;
 
 class PackagistTask implements  TaskInterface
 {
@@ -120,10 +121,15 @@ class PackagistTask implements  TaskInterface
         return $diff > $this->checkInterval;
     }
 
-    public function getNotifications()
+    public function getNotifications(LoggerInterface $logger)
     {
         if(!$this->isCheckPending()){
-            echo sprintf("[%s] No check pending\n", $this->packageName);
+            $logger->info(
+                'no check pending',
+                array(
+                    'package_name' => $this->packageName
+                )
+            );
             return array();
         }
 
@@ -139,7 +145,16 @@ class PackagistTask implements  TaskInterface
         if($lastStats !== null){
             $downloadDiff = $stats['downloads']['total'] - $lastStats['downloads']['total'];
             if($downloadDiff < $this->downloadInterval){
-                echo sprintf("[%s] Download total diff (%s) has not passed %s interval\n", $this->packageName, $downloadDiff, $this->downloadInterval);
+
+                $logger->info(
+                    'download total diff has not passed interval',
+                    array(
+                        'package_name' => $this->packageName,
+                        'diff' => $downloadDiff,
+                        'interval' => $this->downloadInterval
+                    )
+                );
+
                 return array();
             }
         }

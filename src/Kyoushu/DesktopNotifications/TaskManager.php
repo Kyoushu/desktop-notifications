@@ -4,6 +4,7 @@ namespace Kyoushu\DesktopNotifications;
 
 use Kyoushu\DesktopNotifications\Task\PackagistTask;
 use Kyoushu\DesktopNotifications\Task\TaskInterface;
+use Psr\Log\LoggerInterface;
 
 class TaskManager
 {
@@ -19,10 +20,13 @@ class TaskManager
         );
     }
 
-    public static function processTasks()
+    /**
+     * @param LoggerInterface $logger
+     */
+    public static function processTasks(LoggerInterface $logger)
     {
         foreach(self::getTasks() as $task){
-            foreach($task->getNotifications() as $notification){
+            foreach($task->getNotifications($logger) as $notification){
                 $notification->send();
             }
         }
