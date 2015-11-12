@@ -14,10 +14,24 @@ class TaskManager
      */
     public static function getTasks()
     {
-        return array(
+        $tasks =  array(
             new PackagistTask('accord/mandrill-swiftmailer-bundle', 3600),
             new PackagistTask('accord/mandrill-swiftmailer', 3600)
         );
+
+        $tasks = array_merge($tasks, self::getCustomTasks());
+
+        return $tasks;
+    }
+
+    /**
+     * @return array
+     */
+    protected static function getCustomTasks()
+    {
+        $path = sprintf('%s/../../../custom_tasks.php', __DIR__);
+        if(!file_exists($path)) return array();
+        return include($path);
     }
 
     /**
